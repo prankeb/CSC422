@@ -46,6 +46,8 @@ public class PrankeDatabase {
         switch(choice){
             case 1: showAllpets(pets);break;
             case 2: addPets(pets);break;
+            case 5: searchPetName(pets);break;
+            case 6: searchPetAge(pets);break;
             default: break;
         }
     }
@@ -97,6 +99,43 @@ public class PrankeDatabase {
 	System.out.println("\n+-------------------------+\n" + rowCount + " rows in set");
 	}
     
+    public static void searchPetAge(ArrayList<Pet> pets){
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter age to search: ");
+        int petAge = input.nextInt();
+        printTableHeader();
+        int petCounter = 0;
+        for(int i = 0; i < pets.size(); i++){
+            Pet pet = pets.get(i);
+            int age = pet.getAge();
+            String name = pet.getName();
+            if(age == petAge){
+                printTableRow(i, name, age);
+                petCounter++;
+            }
+        }
+        printTableFooter(petCounter);
+        mainMenu(pets);
+    }
+    
+    public static void searchPetName(ArrayList<Pet>pets) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a name to search: ");
+        String petName = input.next();
+        printTableHeader();
+        int petCounter = 0;
+        for(int i = 0; i < pets.size(); i++){
+            Pet pet = pets.get(i);
+            String name = pet.getName();
+            int age = pet.getAge();
+            if(petName.equals(name)){
+                printTableRow(i, name, age);
+                petCounter++;
+            }
+        }
+        printTableFooter(petCounter);
+        mainMenu(pets);
+    }
     //Method for displaying all pets in the array list
     public static void showAllpets(ArrayList<Pet> pets){
         //Calls the table header method to display table header
